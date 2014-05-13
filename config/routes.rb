@@ -1,13 +1,21 @@
 Rails.application.routes.draw do
-  get "login" => "sessions#new"
+  get "login" => "sessions#new" unless @current_user
   get "logout" => "sessions#destroy"
-  resources :users
+  
+  resources :users do
+    member do
+      get :home
+    end
+  end
+  
+  get 'home' => 'users#home'
+  
   resources :sessions, only: [:new, :create, :destroy]
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  # root 'welcome#index'
+  root 'welcome#index'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

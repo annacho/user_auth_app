@@ -1,0 +1,12 @@
+.container-full
+  .row
+    .col-lg-12.text-center.v-center
+      %br
+      %br
+      %h1 User Auth App
+      %p.lead You are Logged In.
+      %br
+      %br
+      %form.col-lg-12
+        .input-group{style: "width:340px;text-align:center;margin:0 auto;"}
+          = link_to "Log Out", logout_path, :class => "btn btn-block btn-primary"
