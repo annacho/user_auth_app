@@ -11,9 +11,9 @@ class ApplicationController < ActionController::Base
   private
 
   def current_user
-  	unless params['_method'] == "delete"
+  	# unless params['_method'] == "delete"
   	@current_user ||= User.find(session[:user_id]) if session[:user_id]
-  	end
+  	# end
 	end
 
   def ensure_logged_in

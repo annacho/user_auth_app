@@ -9,4 +9,4 @@
       %br
       %form.col-lg-12
         .input-group{style: "width:340px;text-align:center;margin:0 auto;"}
-          = link_to "Log Out", logout_path, :class => "btn btn-block btn-primary"
+          = link_to "Log Out", logout_path, :method => "get", :data => { confirm: "Logout?" }, :class => "button btn btn-lg btn-primary"

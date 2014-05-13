@@ -15,6 +15,7 @@
 //= require jquery.ui.autocomplete
 //= require jquery.turbolinks
 //= require turbolinks
+//= require user
 //= require_tree .
 //= require bootstrap/affix
 //= require bootstrap/alert

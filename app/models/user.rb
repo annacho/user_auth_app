@@ -4,4 +4,9 @@ class User < ActiveRecord::Base
 	validates_presence_of :email
 	validates_uniqueness_of :email
 
+	after_create :send_user_auth_message_to_all
+
+	def send_user_auth_message_to_all
+		UserMailer.new_user_auth_message_to_all(User.all, self)
+	end
 end
