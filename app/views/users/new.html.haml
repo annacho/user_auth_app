@@ -1,3 +1,4 @@
+%link{:href => "http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.8/themes/ui-lightness/jquery-ui.css", :rel => "stylesheet", :type => "text/css"}
 .container-full
   .row
     .col-lg-12.text-center.v-center
@@ -7,28 +8,72 @@
       %br
       .col-lg-12.center-block
         = form_for @user, url: users_path, method: :post do |f| 
-          .form-horizontal
+          %form#registerHere.form-horizontal
             .fieldset
               .form-group
                 .col-lg-6
-                  .form-group
+                  .form-group{style: "width:600px;text-align:center;margin:0 auto;"}
                     = f.label :name, :class => "col-lg-2 control-label"
-                    .col-lg-10
+                    .col-lg-10{"data-content" => "What’s your name?", "data-original-title" => "Name", name: "name", rel: "popover", type: "text"}
                       = f.text_field :name, :class => "form-control"
-                  .form-group
+                      %br
+                  .form-group{style: "width:600px;text-align:center;margin:0 auto;"}
                     = f.label :email, :class => "col-lg-2 control-label"
-                    .col-lg-10
+                    .col-lg-10{"data-content" => "What’s your email address?", "data-original-title" => "Email", name: "email", rel: "popover", type: "text"}
                       = f.email_field :email, :class => "form-control"
-                  .form-group
+                      %br
+                  .form-group{style: "width:600px;text-align:center;margin:0 auto;"}
                     = f.label :password, :class => "col-lg-2 control-label"
                     .col-lg-10
                       = f.password_field :password, :class => "form-control"
-                  .form-group
+                      %br
+                  .form-group{style: "width:600px;text-align:center;margin:0 auto;"}
                     = f.label :password_confirmation, :class => "col-lg-2 control-label"
                     .col-lg-10
                       = f.password_field :password_confirmation, :class => "form-control"
+                      %br
                   .actions
                     .form-group
                       .col-lg-10.col-lg-offset-2
                         = f.submit "Sign Up", :class => "btn btn-success"
                         = link_to "Cancel", new_session_path, :class => "btn btn-primary"
+
+:javascript
+  $('#registerHere input').hover(function(){
+    $(this).popover('show')
+  });
+
+  $("#registerHere").validate({
+    onkeyup: false,
+    rules:{
+      name:"required",
+      email:{required:true,email: true},
+      pwd:{required:true,minlength: 6},
+      cpwd:{required:true,equalTo: "#pwd"},
+    },
+
+    messages:{
+      name:"Enter your first and last name",
+      email:{
+        required:"Enter your email address",
+        email:"Enter valid email address"},
+      pwd:{
+        required:"Enter your password",
+        minlength: jQuery.format("Password must be minimum 6 characters")},
+      cpwd:{
+        required:"Enter confirm password",
+        equalTo:"Password and Confirm Password must match"},
+    },
+
+    errorClass: "help-inline",
+    errorElement: "span",
+    highlight:function(element, errorClass, validClass)
+    {
+      $(element).parents('.control-group').addClass('error');
+    },
+    unhighlight: function(element, errorClass, validClass)
+    {
+      $(element).parents('.control-group').removeClass('error');
+      $(element).parents('.control-group').addClass('success');
+    }
+  });
