@@ -1,40 +1,6 @@
-// $(function() {
-//   $( "form#add_" ).submit(function() {
-//     var inputVal = $("#Email").val();
-//     $(document).trigger("clear-alert-id.example");
-//     if (inputVal.length < 3) {
-//       $(document).trigger("set-alert-id-example", [
-//         {
-//           message: "Please enter at least 3 characters",
-//           priority: "error"
-//         },
-//         {
-//           message: "This is an info alert",
-//           priority: "info"
-//         }
-//       ]);
-//     }
-//   });
-// });
-
-// $(function() {
-//   $('form#add_validation_to_ajax_form').submit( function() {
-//     alert ("hello :)");
-//     add_custom_validation_methods();
-//     force_ckeditor_to_update();
-//     $(this).validate({
-//       meta:"validate",
-//       onkeyup:false,
-//       validClass:"ok-input",
-//       errorPlacement: function(error, element) {}
-//     });
-//   });
-// });
-
 <script src="//jquery.validate.js"></script>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 <script type="text/javascript">
-
 
   $('#registerHere input').hover(function(){
     $(this).popover('show')
