@@ -6,6 +6,7 @@ class UsersController < ApplicationController
 	end
 
 	def index
+    @users = User.notonline
 	end
 
 	def home
@@ -39,6 +40,22 @@ class UsersController < ApplicationController
       redirect_to home_path
     else
       render :edit
+    end
+  end
+
+  def detect_online
+    @user = User.find(params[:id])
+    if @user.update_attributes(user_params)
+      respond_to do |format|
+        format.js
+        # render :update => currently update.js.erb
+        format.html { redirect_to users_path }
+      end
+    else
+      respond_to do |format|
+        format.js { render plain: "0" }
+        format.html { redirect_to users_path, notice: "Online detection failed." }
+      end
     end
   end
 

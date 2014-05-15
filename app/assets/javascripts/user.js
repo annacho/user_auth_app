@@ -66,4 +66,35 @@ $(document).ready(function() {
 	// 	$('#pswd_info').hide();
 	// }); 
 
+	$(':checkbox').on('click', function(){
+
+		var row 		= $(this).parents('tr'),
+				user_id = $(this).attr('data-user-id');
+		
+		// console.log(task_id)
+
+		$.ajax({
+
+			url: "/users/" + user_id,
+			type: 'PUT',
+			data: {
+				user: {
+					"online": true
+				}
+			},
+			success: function(data){ 
+				console.log(data);
+				if (data == "1") {
+					$(row).hide( "slow" );
+				}
+				else {
+					console.log("false");
+					$(row).addClass("failed");
+				}
+			}
+
+		});
+
+	});
+
 });
