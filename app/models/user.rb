@@ -1,4 +1,6 @@
 class User < ActiveRecord::Base
+	scope :notonline, -> { where.not(online: true) }
+
 	has_secure_password
 
 	validates_presence_of :email

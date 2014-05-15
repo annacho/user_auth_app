@@ -1,12 +1,14 @@
 Rails.application.routes.draw do
-  get "login" => "sessions#new" unless @current_user
+  get "login" => "sessions#new" 
+  # unless @current_user
   get "logout" => "sessions#destroy"
   
-  resources :users do
-    member do
-      get :home
-    end
-  end
+  resources :users 
+  # do
+  #   member do
+  #     get :home  # /users/:id/home
+  #   end
+  # end
   
   get 'home' => 'users#home'
   

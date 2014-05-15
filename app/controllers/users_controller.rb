@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  skip_filter :ensure_logged_in, only: [:new, :create, :destroy, :delete]
+  skip_filter :ensure_logged_in, only: [:new, :create, :destroy]
 
 	def new
 		@user = User.new
@@ -43,21 +43,21 @@ class UsersController < ApplicationController
     end
   end
 
-  def detect_online
-    @user = User.find(params[:id])
-    if @user.update_attributes(user_params)
-      respond_to do |format|
-        format.js
-        # render :update => currently update.js.erb
-        format.html { redirect_to users_path }
-      end
-    else
-      respond_to do |format|
-        format.js { render plain: "0" }
-        format.html { redirect_to users_path, notice: "Online detection failed." }
-      end
-    end
-  end
+  # def detect_online
+  #   @user = User.find(params[:id])
+  #   if @user.update_attributes(user_params)
+  #     respond_to do |format|
+  #       format.js
+  #       # render :update => currently update.js.erb
+  #       format.html { redirect_to users_path }
+  #     end
+  #   else
+  #     respond_to do |format|
+  #       format.js { render plain: "0" }
+  #       format.html { redirect_to users_path, notice: "Online detection failed." }
+  #     end
+  #   end
+  # end
 
   def destroy
     if current_user.destroy!

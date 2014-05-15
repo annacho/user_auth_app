@@ -12,12 +12,12 @@
           = link_to "Login", new_session_path, :class => "btn btn-block btn-primary"
           %br
           = link_to "Sign Up", new_user_path, :class => "btn btn-block btn-primary"
-    .col-lg-12.text-center.v-center 
-      %br
-      %br     
-      %h3 User Auth App Users Online Now
-      %br
-      / - @users.each do |u|
-      /   %tr
-      /     %td= u.name
-      /     %td= check_box_tag "online", "1", u.online, data: { "user-id" => u.name }
+    / .col-lg-12.text-center.v-center 
+    /   %br
+    /   %br     
+    /   %h3 User Auth App Users Online Now
+    /   %br
+    /   - @users.each do |u|
+    /     %tr
+    /       %td= u.name
+    /       %td= check_box_tag "online", "1", u.online, data: { "user-id" => u.name }
