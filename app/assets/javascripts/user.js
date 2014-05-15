@@ -1,76 +1,69 @@
-// $(function() {
-//   $( "form#add_" ).submit(function() {
-//     var inputVal = $("#Email").val();
-//     $(document).trigger("clear-alert-id.example");
-//     if (inputVal.length < 3) {
-//       $(document).trigger("set-alert-id-example", [
-//         {
-//           message: "Please enter at least 3 characters",
-//           priority: "error"
-//         },
-//         {
-//           message: "This is an info alert",
-//           priority: "info"
-//         }
-//       ]);
-//     }
-//   });
-// });
+$(document).ready(function() {
 
-// $(function() {
-//   $('form#add_validation_to_ajax_form').submit( function() {
-//     alert ("hello :)");
-//     add_custom_validation_methods();
-//     force_ckeditor_to_update();
-//     $(this).validate({
-//       meta:"validate",
-//       onkeyup:false,
-//       validClass:"ok-input",
-//       errorPlacement: function(error, element) {}
-//     });
-//   });
-// });
+	$('input[type=email]').keyup(function() {
+		//set email variable
+		var email = $(this).val();
 
-<script src="//jquery.validate.js"></script>
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-<script type="text/javascript">
-
-  $('#registerHere input').hover(function(){
-    $(this).popover('show')
-  });
-
-  $("#registerHere").validate({
-  	onkeyup: false,
-    rules: {
-      name:"required",
-      email:{required:true,email: true},
-      pwd:{required:true,minlength: 6},
-      cpwd:{required:true,equalTo: "#pwd"},
-    },
-
-    messages: {
-      name:"Enter your first and last name",
-      email:{
-        required:"Enter your email address",
-        email:"Enter valid email address"},
-      pwd:{
-        required:"Enter your password",
-        minlength: jQuery.format("Password must be minimum 6 characters")},
-      cpwd:{
-        required:"Enter confirm password",
-        equalTo:"Password and Confirm Password must match"},
-    },
-
-    errorClass: "help-inline",
-    errorElement: "span",
-    highlight:function(element, errorClass, validClass)
-    {
-      $(element).parents('.control-group').addClass('error');
-    },
-    unhighlight: function(element, errorClass, validClass)
-    {
-      $(element).parents('.control-group').removeClass('error');
-      $(element).parents('.control-group').addClass('success');
+		//validate filled in
+		if ( email  == '') {
+        alert('Field is empty. Please input your email.');
+        return false;
     }
-  });
- </script>
+	}); 
+
+	$('input[type=password]').keyup(function() {
+		//set password variable
+		var pswd = $(this).val();
+
+		//validate the length
+		if ( pswd.length < 8 ) {
+			$('#length').removeClass('valid').addClass('invalid');
+		} else {
+			$('#length').removeClass('invalid').addClass('valid');
+		}
+
+		//validate letter
+		if ( pswd.match(/[A-z]/) ) {
+			$('#letter').removeClass('invalid').addClass('valid');
+		} else {
+			$('#letter').removeClass('valid').addClass('invalid');
+		}
+
+		//validate capital letter
+		if ( pswd.match(/[A-Z]/) ) {
+			$('#capital').removeClass('invalid').addClass('valid');
+		} else {
+			$('#capital').removeClass('valid').addClass('invalid');
+		}
+
+		//validate number
+		if ( pswd.match(/\d/) ) {
+			$('#number').removeClass('invalid').addClass('valid');
+		} else {
+			$('#number').removeClass('valid').addClass('invalid');
+		}
+
+	}).focus(function() {
+		$('#pswd_info').show();
+	}).blur(function() {
+		$('#pswd_info').hide();
+	}); 
+
+	// $('input[type=password_confirmation]').keyup(function() {
+	// // set password confirmation variable
+	// var pswdconfirm = $(this).val();
+
+	// //validate password confirmation
+	// if ( pswd != pswdconfirm ) {
+	// 	$('#password_confirmation').removeClass('valid').addClass('invalid');
+	// } else {
+	// 	$('#password_confirmation').removeClass('invalid').addClass('valid');
+	// }
+
+	// }).focus(function() {
+	// 	$('#pswd_info').show();
+	// }).blur(function() {
+	// 	$('#pswd_info').hide();
+	// }); 
+
+});

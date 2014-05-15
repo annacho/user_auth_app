@@ -1,4 +1,6 @@
-%link{:href => "http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.8/themes/ui-lightness/jquery-ui.css", :rel => "stylesheet", :type => "text/css"}
+%script{src: "js/jquery.validate.min.js"}
+%script{src: "http://code.jquery.com/jquery-1.7.min.js"}
+
 .container-full
   .row
     .col-lg-12.text-center.v-center
@@ -7,17 +9,15 @@
       %br
       %br
       .col-lg-12.center-block
-        .form-group{style: "width:600px;text-align:center;margin:0 auto;"}
+        %form#login-form.form-horizontal{style: "width:600px;text-align:center;margin:0 auto;"}
           = form_tag sessions_path do
-            .form-group
+            .form-group{for: "email"}
               = label_tag :email, nil, class: "control-label"
               = text_field_tag :email, params[:email], :class => "form-control input-lg"
-            .form-group
+            .form-group{for: "password"}
               = label_tag :password, nil, class: "control-label"
               = password_field_tag :password, nil, class: "form-control input-lg"
-            / .form-group
-            /   .checkbox
-            /     = label_tag "Remember this Computer" class: "control-label"
+  
             %br
             %br
             .actions
@@ -27,57 +27,18 @@
                   %a= link_to "Back", :root
                 %span.pull-right
                   %a= link_to "Register", new_user_path
-
-
-  / %form#registerHere.form-horizontal{action: "", method: "post"}
-  / %fieldset
-  /   %legend Registration
-  /   .control-group
-  /     %label.control-label Email
-  /     .controls
-  /       %input#user_email.input-xlarge{"data-content" => "What’s your email address?", "data-original-title" => "Email", name: "user_email", rel: "popover", type: "text"}/
-  /   \.............
-  /   \.............
-  /   .control-group
-  /     %label.control-label
-  /     .controls
-  /       %button.btn.btn-success{type: "submit"} Create My Account
-
-:javascript
-  $('#registerHere input').hover(function(){
-    $(this).popover('show')
-  });
-
-  $("#registerHere").validate({
-    rules:{
-      name:"required",
-      email:{required:true,email: true},
-      pwd:{required:true,minlength: 6},
-      cpwd:{required:true,equalTo: "#pwd"},
-    },
-
-    messages:{
-      name:"Enter your first and last name",
-      email:{
-        required:"Enter your email address",
-        email:"Enter valid email address"},
-      pwd:{
-        required:"Enter your password",
-        minlength:"Password must be minimum 6 characters"},
-      cpwd:{
-        required:"Enter confirm password",
-        equalTo:"Password and Confirm Password must match"},
-    },
-
-    errorClass: "help-inline",
-    errorElement: "span",
-    highlight:function(element, errorClass, validClass)
-    {
-      $(element).parents('.control-group').addClass('error');
-    },
-    unhighlight: function(element, errorClass, validClass)
-    {
-      $(element).parents('.control-group').removeClass('error');
-      $(element).parents('.control-group').addClass('success');
-    }
-  });
+      #pswd_info{style: "text-align:left;"}
+        %h4 Password must meet the following requirements:
+        %ul
+          %li#letter.invalid
+            At least
+            %strong one letter
+          %li#capital.invalid
+            At least
+            %strong one capital letter
+          %li#number.invalid
+            At least
+            %strong one number
+          %li#length.invalid
+            Be at least
+            %strong 8 characters
